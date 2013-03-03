@@ -75,7 +75,8 @@ hi NonText          guifg=#535353     guibg=grey10       gui=bold      ctermfg=b
 hi Cursor           guifg=black       guibg=white       gui=NONE      ctermfg=black       ctermbg=white       cterm=reverse
 " yaojg
 "hi LineNr           guifg=#3D3D3D     guibg=black       gui=NONE      ctermfg=darkgray    ctermbg=NONE        cterm=NONE
-hi LineNr           guifg=#8b8bcd     guibg=black       gui=NONE      ctermfg=darkgray    ctermbg=NONE        cterm=NONE
+"hi LineNr           guifg=#8b8bcd     guibg=black       gui=NONE      ctermfg=darkgray    ctermbg=NONE        cterm=NONE
+hi LineNr           guifg=#777777     guibg=grey6       gui=NONE      ctermfg=darkgray    ctermbg=NONE        cterm=NONE
 "hi LineNr         gui=NONE   guifg=#8b8bcd   guibg=#2e2e2e
 
 hi VertSplit        guifg=#575555     guibg=#575555     gui=NONE      ctermfg=darkgray    ctermbg=darkgray    cterm=NONE
@@ -182,7 +183,7 @@ hi link rubyConstant          Type
 " Special for Java
 " hi link javaClassDecl    Type
 hi link javaScopeDecl         Identifier 
-hi link javaCommentTitle      javaDocSeeTag 
+hi link javaCommentTitle      Comment 
 hi link javaDocTags           javaDocSeeTag 
 hi link javaDocParam          javaDocSeeTag 
 hi link javaDocSeeTagParam    javaDocSeeTag 
