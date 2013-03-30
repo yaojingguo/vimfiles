@@ -1,0 +1,14 @@
+win 100 35
+"color molokai
+"color peaksea
+"color tir_black
+"color inkpot
+"color darkspectrum
+"color jellybeans
+"color slate
+""""""""""""""""""""""""""""
+" My favorites
+""""""""""""""""""""""""""""
+color ir_black
+"color oceanblack
+set guioptions-=m  "remove menu bar

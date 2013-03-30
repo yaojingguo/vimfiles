@@ -1,0 +1,427 @@
+set nocompatible  
+"set gfn=Ubuntu\ Mono\ 18
+set gfn=Monaco\ 16
+"set gfn=Monospace\ 18
+"set gfn=ProggyClean\ 12
+set hls
+
+filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
+filetype plugin indent on
+syntax on
+
+"filetype plugin indent on
+"syntax on
+set path=.,/usr/include,**,
+
+let mapleader = ","
+let maplocalleader = ","
+
+
+set fileencodings=utf-8,gb2312,gbk,gb18030
+set termencoding=utf-8
+"set encoding=prc
+set encoding=utf-8
+
+command Thtml :%!tidy -q -i -html
+command Txml  :%!tidy -q -i -xml
+
+set nowrap
+
+"json indent
+map <leader>jt  <Esc>:%!json_xs -f json -t json-pretty<CR>
+
+"vimclojure
+let vimclojure#NailgunClient="ng"
+"let vimclojure#WantNailgun = 1
+map <leader>ng :let vimclojure#WantNailgun=1<CR>
+
+"nerdcommenter
+let NERDRemoveExtraSpaces=0
+
+"latex-suite
+"let g:Tex_DefaultTargetFormat='pdf'
+"noremap <silent> <D-V> <Esc>:BuildAndViewTexPdf<CR> 
+"inoremap <silent> <D-V> <Esc>:BuildAndViewTexPdf<CR> 
+"noremap <silent> <D-T> <Esc>:BuildTexPdf<CR> 
+"inoremap <silent> <D-T> <Esc>:BuildTexPdf<CR> 
+let g:tex_pdf_map_leader_keys = 0 
+
+"set splitbelow
+set linebreak
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tag list
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let Tlist_Show_One_File = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Command mode related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Smart mappings on the command line
+cno $og cs find g 
+cno $o cs find 
+cno $so cs find 
+cno $vo cs find 
+cno $h e ~/
+"cno $d e ~/Desktop/
+cno $j e ./
+cno $c e <C-\>eCurrentFileDir("e")<cr>
+
+" $q is super useful when browsing on the command line
+cno $q <C-\>eDeleteTillSlash()<cr>
+
+" Bash like keys for the command line
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-K> <C-U>
+
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+func! Cwd()
+  let cwd = getcwd()
+  return "e " . cwd 
+endfunc
+
+func! DeleteTillSlash()
+  let g:cmd = getcmdline()
+  if MySys() == "linux" || MySys() == "mac"
+    let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
+  else
+    let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
+  endif
+  if g:cmd == g:cmd_edited
+    if MySys() == "linux" || MySys() == "mac"
+      let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
+    else
+      let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
+    endif
+  endif   
+  return g:cmd_edited
+endfunc
+
+func! CurrentFileDir(cmd)
+  return a:cmd . " " . expand("%:p:h") . "/"
+endfunc
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Haskell
+""""""""""""""""""""""""""""""""""""""""""""""
+"au BufEnter *.hs compiler ghc
+let g:haddock_browser = "/opt/google/chrome/google-chrome"
+let g:haddock_docdir="/usr/share/doc/ghc6-doc/html"
+let g:haddock_indexfiledir="/home/jing/.vim/"
+
+" move around windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" grep the word under the cursor
+map <leader>g :grep <cword><CR>
+
+" Tab configuration
+map <leader>tn :tabnew<cr>
+map <leader>te :tabedit 
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove 
+
+" Use the arrows to something useful
+"map <right> :bn<cr>
+"map <left> :bp<cr>
+
+" When pressing <leader>cd switch to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>
+
+""""""""""""""""""""""""""""""
+" => Minibuffer plugin
+""""""""""""""""""""""""""""""
+"let g:miniBufExplModSelTarget = 1
+"let g:miniBufExplorerMoreThanOne = 2
+"let g:miniBufExplModSelTarget = 0
+"let g:miniBufExplUseSingleClick = 1
+"let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplVSplit = 25
+"let g:miniBufExplSplitBelow=1
+
+""""""""""""""""""""""""""""""
+" => MRU plugin
+""""""""""""""""""""""""""""""
+let MRU_Max_Entries = 400
+map <leader>f :MRU<CR>
+
+" Tab configuration
+map <leader>tn :tabnew<cr>
+map <leader>te :tabedit 
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Cope
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Do :help cope if you are unsure what cope is. It's super useful!
+map <leader>cc :botright cope<cr>
+map <leader>cn :cn<cr>
+map <leader>cp :cp<cr>
+
+
+"Clojure
+let vimclojure#HighlightBuiltins=1
+let vimclojure#ParenRainbow=1
+
+map <Leader>d :NERDTreeToggle<CR>
+map <leader>w :NERDTree .<CR>
+"let NERDTreeIgnore = ['\~$', '\.pyc$', '\.os$', , '\.hi$', 'cscope.*$']
+let NERDTreeIgnore = ['yfs1', 'yfs2', '\~$', '\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$']
+
+
+set wildignore+=*.o,*.obj,.git,*.class,*.hi,CVS
+
+set guioptions-=T
+
+function! ResetFuzzy(root)
+  let g:fuzzy_roots = [a:root]
+  call InstantiateTextMateMode()
+endfunction
+
+command! -complete=dir -nargs=* Rft :call ResetFuzzy(<f-args>)
+"map <leader>t :FuzzyFinderTextMate<CR>
+
+
+function! Txt(width) 
+  execute "setlocal tw=".a:width
+  set ai
+  set formatoptions+=tcnqaw
+endfunction
+
+set nu
+set ic
+"set spell
+
+
+set grepprg=ack-grep
+
+vmap c "+y
+map <leader>v  "+gp
+"map <leader>v  "+gP
+
+
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
+set directory=~/.tmp-jing/vim
+set backupdir=~/.tmp-jing/vim
+
+set makeprg=g++\ -std=c++0x\ %
+map <F5> :call Compile()<CR>
+map <F7> :call Run()<CR>
+
+func! Compile() 
+  exec "w"
+  exec "make"
+endfunc
+
+func! Run()
+  exec "!./a.out"
+endfunc
+
+
+let g:SuperTabMappingForward = '<c-space>'
+let g:SuperTabMappingBackward = '<s-c-space>'
+
+
+"imap <c-space> <c-p>
+"imap <c-space> <c-n>
+
+map! <C-F> <Esc>gUiw`]a
+
+"set tab
+function! SetTab(num) 
+  execute "set tabstop=".a:num
+  execute "set softtabstop=".a:num
+  execute "set shiftwidth=".a:num
+	set expandtab
+endfunction
+
+" function! SetLocalTab(num)
+"   execute "setlocal tabstop=".a:num
+"   execute "setlocal softtabstop=".a:num
+"   execute "setlocal shiftwidth=".a:num
+"   set expandtab
+" endfunction
+
+call SetTab(4)
+
+function! ST(title) 
+  "let &g:titlestring=a:title
+  let &g:titlestring= a:title . " %t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)"
+endfunction
+
+"tag
+nnoremap <silent> <F8> :TlistToggle<CR>
+
+"set formatlistpat=^\\s*\\*?\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+
+function! SetC()
+  "call SetTab(2)
+  "setlocal noic
+  setl formatoptions-=ro " not to automatically insert comment leader
+  setl formatoptions-=t
+  setl formatoptions+=ncqaw
+endfunction
+
+autocmd BufRead,BufNewFile *.java call SetJava()
+"78
+autocmd BufRead,BufNewFile *.txt,*tex call Txt(80)
+"70
+autocmd BufRead,BufNewFile README*,*.mail call Txt(72)
+autocmd BufRead,BufNewFile SConstruct :set syn=python
+autocmd BufRead,BufNewFile *.cc,*.cpp,*.c,*.h,*.S call SetC()
+"autocmd BufRead,BufNewFile *.lsp so $HOME/.vim/plugin/RainbowParenthsis.vim
+
+function! SetJava()
+  call SetTab(4)
+  setlocal tw=80
+  "setlocal tags+=/data/prog/java/jdk-6u22-src/tags
+  "setlocal tags+=/data/prog/java/openjdk-6-src-b26/jdk/src/share/classes/tags
+  "setlocal tags+=./tags
+  setlocal tags+=/data/prog/java/openjdk-7-source/tags
+  setlocal noic
+  "setlocal foldmethod=expr
+  "setlocal foldexpr=getline(v:lnum)[0:5]==\"import\"
+  "setlocal formatoptions-=r
+  "syn keyword javaExternal native package
+  "setlocal foldmethod=syntax
+  "setlocal foldnestmax=2
+  "syntax region foldImports start=/\(^\s*\n^import\)\@<= .\+;/ end=+^\s*$+ transparent fold keepend
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"cscope
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! CreateScope() 
+  !find -name '*.[chsS]' > cscope.files
+	"!cscope -b -k -q
+  !cscope -b -q
+  cs reset
+endfunction
+
+if has("cscope")
+  set csprg=cscope
+  set csto=0
+
+  set cscopequickfix=s-,c-,d-,i-,t-,e-
+  " add any database in current directory
+  if filereadable("cscope.out")
+      cs add cscope.out
+      "set cst
+  " else add database pointed to by environment
+  elseif $CSCOPE_DB != ""
+      cs add $CSCOPE_DB
+  endif
+  set csverb
+
+  nmap <leader>or :call CreateScope()<CR><CR>
+
+  nmap <leader>ox :cs find 
+  nmap <leader>sox :cs find 
+  nmap <leader>vox :cs find 
+
+  " mapping
+  nmap <leader>os :cs find s <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>og :cs find g <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>oc :cs find c <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>ot :cs find t <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>oe :cs find e <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>of :cs find f <C-R>=expand("<cfile>")<CR><CR>
+  nmap <leader>oi :cs find i <C-R>=expand("<cfile>")<CR><CR>
+  nmap <leader>od :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+  nmap <leader>sos :scs find s <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>sog :scs find g <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>soc :scs find c <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>sot :scs find t <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>soe :scs find e <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>sof :scs find f <C-R>=expand("<cfile>")<CR><CR>
+  nmap <leader>soi :scs find i <C-R>=expand("<cfile>")<CR><CR>
+  nmap <leader>sod :scs find d <C-R>=expand("<cword>")<CR><CR>
+
+  nmap <leader>vos :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>vog :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>voc :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>vot :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>voe :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+  nmap <leader>vof :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+  nmap <leader>voi :vert scs find i <C-R>=expand("<cfile>")<CR><CR>
+  nmap <leader>vod :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+
+  "nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+  "nmap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+  "nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+  "cnoreabbrev <expr> csa
+  "      \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs add'   : 'csa')
+  "cnoreabbrev <expr> csf
+  "      \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find'  : 'csf')
+  "cnoreabbrev <expr> csk
+  "      \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs kill'  : 'csk')
+  "cnoreabbrev <expr> csr
+  "      \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs reset' : 'csr')
+  "cnoreabbrev <expr> css
+  "      \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs show'  : 'css')
+  "cnoreabbrev <expr> csh
+  "      \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs help'  : 'csh')
+endif
+
+"xmllint
+map <Leader>cd :exe 'cd ' . expand ("%:p:h")<CR>
+nmap <Leader>vx <Leader>cd:%w !xmllint --noout -<CR>
+nmap <Leader>px :%!xmllint --format -<CR>
+
+"set Find 
+function! Find(...)
+  if a:0==2
+    let path=a:1
+    let l:name=a:2
+  else
+    let path="."
+    let l:name=a:1
+  endif
+  let l:list=system("find ".path." -name '*.class' -prune -o -path '*/.svn' -prune -o -name '".l:name."' -print | perl -ne 'print \"$.\\t$_\"'")
+  let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
+  if l:num < 1
+    echo "'".l:name."' not found"
+    return
+  endif
+  if l:num != 1
+    echo l:list
+    let l:input=input("Which ? (CR=nothing)\n")
+    if strlen(l:input)==0
+      return
+    endif
+    if strlen(substitute(l:input, "[0-9]", "", "g"))>0
+      echo "Not a number"
+      return
+    endif
+    if l:input<1 || l:input>l:num
+      echo "Out of range"
+      return
+    endif
+    let l:line=matchstr("\n".l:list, "\n".l:input."\t[^\n]*")
+  else
+    let l:line=l:list
+  endif
+  let l:line=substitute(l:line, "^[^\t]*\t", "", "")
+  execute ":e ".l:line
+endfunction
+command! -nargs=* Find :call Find(<f-args>)
