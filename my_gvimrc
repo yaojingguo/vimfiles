@@ -9,6 +9,6 @@ win 100 35
 """"""""""""""""""""""""""""
 " My favorites
 """"""""""""""""""""""""""""
-color ir_black
-"color oceanblack
+"color ir_black
+color oceanblack
 set guioptions-=m  "remove menu bar

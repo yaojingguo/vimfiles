@@ -5,6 +5,8 @@ set gfn=Monaco\ 16
 "set gfn=ProggyClean\ 12
 set hls
 
+execute pathogen#infect()
+
 filetype off
 filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
@@ -13,7 +15,15 @@ syntax on
 
 "filetype plugin indent on
 "syntax on
-set path=.,/usr/include,**,
+
+function Path(flag)
+  if a:flag == 0
+    set path=.,/usr/include,
+  else
+    set path=.,/usr/include,**,
+  endif
+endfunction
+
 
 let mapleader = ","
 let maplocalleader = ","
@@ -255,7 +265,7 @@ endfunction
 "   set expandtab
 " endfunction
 
-call SetTab(4)
+call SetTab(2)
 
 function! ST(title) 
   "let &g:titlestring=a:title
@@ -285,7 +295,7 @@ autocmd BufRead,BufNewFile *.cc,*.cpp,*.c,*.h,*.S call SetC()
 "autocmd BufRead,BufNewFile *.lsp so $HOME/.vim/plugin/RainbowParenthsis.vim
 
 function! SetJava()
-  call SetTab(4)
+  "call SetTab(4)
   setlocal tw=80
   "setlocal tags+=/data/prog/java/jdk-6u22-src/tags
   "setlocal tags+=/data/prog/java/openjdk-6-src-b26/jdk/src/share/classes/tags
