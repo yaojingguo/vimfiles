@@ -57,11 +57,25 @@ snippet cs
 	case ${1}:
 		${2}
 	${3}
-snippet tc
+snippet tc_
 	public class ${1:`Filename()`} extends ${2:TestCase}
-snippet t
+snippet t_
 	public void test${1:Name}() throws Exception ${2}
+snippet tc
+	import org.junit.Test;
+	import static org.junit.Assert.*;
+	import java.util.*;
+
+	public class ${1:`Filename("", "untitled")`} {
+		${2}
+	}
+snippet t
+	@Test
+	public void test${1:Name}() {
+		${2}
+	}
 snippet cl
+	import java.util.*;
 	public class ${1:`Filename("", "untitled")`} {
 		${2}
 	}
