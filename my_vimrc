@@ -7,6 +7,10 @@ set hls
 
 execute pathogen#infect()
 
+"Show filename
+set guitablabel=%t
+
+
 filetype off
 filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
@@ -24,9 +28,15 @@ function Path(flag)
   endif
 endfunction
 
+let g:table_mode_motion_prefix = '<Leader>u'
 
 let mapleader = ","
 let maplocalleader = ","
+
+set undodir=/home/jing/.tmp-jing/vim-undodir
+set undofile
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
 
 set fileencodings=utf-8,gb2312,gbk,gb18030
@@ -131,7 +141,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " grep the word under the cursor
-map <leader>g :grep <cword><CR>
+"map <leader>g :grep <cword><CR>
 
 " Tab configuration
 map <leader>tn :tabnew<cr>
@@ -184,8 +194,12 @@ let vimclojure#ParenRainbow=1
 
 map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
-"let NERDTreeIgnore = ['\~$', '\.pyc$', '\.os$', , '\.hi$', 'cscope.*$']
-let NERDTreeIgnore = ['yfs1', 'yfs2', '\~$', '\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$']
+let NERDTreeIgnore = ['tags', 'yfs1', 'yfs2', '\~$', '\.aux$', '\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$']
+
+
+function! SetPython()
+  let g:NERDTreeIgnore += ['\.pdf$', '\.tex$', '\.html$', '\.log$', '\.txt$']
+endfunction
 
 
 set wildignore+=*.o,*.obj,.git,*.class,*.hi,CVS
@@ -227,7 +241,7 @@ vnoremap k gk
 set directory=~/.tmp-jing/vim
 set backupdir=~/.tmp-jing/vim
 
-set makeprg=g++\ -std=c++0x\ %
+set makeprg=g++\ -pthread\ -std=c++0x\ %
 map <F5> :call Compile()<CR>
 map <F7> :call Run()<CR>
 
@@ -287,12 +301,13 @@ endfunction
 
 autocmd BufRead,BufNewFile *.java call SetJava()
 "78
-autocmd BufRead,BufNewFile *.txt,*tex call Txt(80)
+autocmd BufRead,BufNewFile *.txt,*tex,*.md call Txt(80)
 "70
 autocmd BufRead,BufNewFile README*,*.mail call Txt(72)
 autocmd BufRead,BufNewFile SConstruct :set syn=python
 autocmd BufRead,BufNewFile *.cc,*.cpp,*.c,*.h,*.S call SetC()
 "autocmd BufRead,BufNewFile *.lsp so $HOME/.vim/plugin/RainbowParenthsis.vim
+autocmd BufRead,BufNewFile *.py call SetPython()
 
 function! SetJava()
   "call SetTab(4)
@@ -326,7 +341,7 @@ if has("cscope")
   set csprg=cscope
   set csto=0
 
-  set cscopequickfix=s-,c-,d-,i-,t-,e-
+  set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
   " add any database in current directory
   if filereadable("cscope.out")
       cs add cscope.out
