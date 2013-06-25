@@ -8,7 +8,9 @@ set hls
 execute pathogen#infect()
 
 "Show filename
-set guitablabel=%t
+set guitablabel=%M\ %t
+
+au BufNewFile,BufRead *.cc11,*.h11 set syntax=cpp11
 
 
 filetype off
@@ -16,6 +18,10 @@ filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
 filetype plugin indent on
 syntax on
+
+function Maximize_Window() 
+  silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz 
+endfunction 
 
 "filetype plugin indent on
 "syntax on
@@ -141,13 +147,13 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " grep the word under the cursor
-"map <leader>g :grep <cword><CR>
+map <leader>g :grep <cword><CR>
 
 " Tab configuration
 map <leader>tn :tabnew<cr>
 map <leader>te :tabedit 
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
+map <leader>tm :tabmove<cr>
 
 " Use the arrows to something useful
 "map <right> :bn<cr>
@@ -293,7 +299,7 @@ nnoremap <silent> <F8> :TlistToggle<CR>
 
 function! SetC()
   "call SetTab(2)
-  "setlocal noic
+  setlocal noic
   setl formatoptions-=ro " not to automatically insert comment leader
   setl formatoptions-=t
   setl formatoptions+=ncqaw
