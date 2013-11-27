@@ -12,7 +12,6 @@ set guitablabel=%M\ %t
 
 au BufNewFile,BufRead *.cc11,*.h11 set syntax=cpp11
 
-
 filetype off
 filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
@@ -38,6 +37,10 @@ let g:table_mode_motion_prefix = '<Leader>u'
 
 let mapleader = ","
 let maplocalleader = ","
+
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+":hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+map <Leader>hh :set cursorline!<CR>
 
 set undodir=/home/jing/.tmp-jing/vim-undodir
 set undofile
@@ -204,6 +207,7 @@ let NERDTreeIgnore = ['tags', 'yfs1', 'yfs2', '\~$', '\.aux$', '\.pyc$', '\.hi$'
 
 
 function! SetPython()
+  call SetTab(4)
   let g:NERDTreeIgnore += ['\.pdf$', '\.tex$', '\.html$', '\.log$', '\.txt$']
 endfunction
 
@@ -222,9 +226,10 @@ command! -complete=dir -nargs=* Rft :call ResetFuzzy(<f-args>)
 
 
 function! Txt(width) 
+  "set syn=txt
   execute "setlocal tw=".a:width
   set ai
-  set formatoptions+=tcnqaw
+  set formatoptions=tcnqaw
 endfunction
 
 set nu
@@ -247,7 +252,8 @@ vnoremap k gk
 set directory=~/.tmp-jing/vim
 set backupdir=~/.tmp-jing/vim
 
-set makeprg=g++\ -pthread\ -std=c++0x\ %
+"set makeprg=g++\ -pthread\ -std=c++0x\ %
+set makeprg=g++\ -pthread\ %
 map <F5> :call Compile()<CR>
 map <F7> :call Run()<CR>
 
@@ -307,9 +313,10 @@ endfunction
 
 autocmd BufRead,BufNewFile *.java call SetJava()
 "78
-autocmd BufRead,BufNewFile *.txt,*tex,*.md call Txt(80)
+autocmd BufRead,BufNewFile *.txt,*tex,*.md,README call Txt(80)
+
 "70
-autocmd BufRead,BufNewFile README*,*.mail call Txt(72)
+autocmd BufRead,BufNewFile *.mail call Txt(72)
 autocmd BufRead,BufNewFile SConstruct :set syn=python
 autocmd BufRead,BufNewFile *.cc,*.cpp,*.c,*.h,*.S call SetC()
 "autocmd BufRead,BufNewFile *.lsp so $HOME/.vim/plugin/RainbowParenthsis.vim
@@ -337,9 +344,9 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CreateScope() 
-  !find -name '*.[chsS]' > cscope.files
+  "!find -name '*.[chsS]' > cscope.files
 	"!cscope -b -k -q
-  !cscope -b -q
+  "!cscope -b -q
   cs reset
 endfunction
 
