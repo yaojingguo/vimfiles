@@ -85,6 +85,7 @@ set linebreak
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let Tlist_Show_One_File = 1
 
+"cno $ost vimgrep /struct {/ *.[ch]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -203,11 +204,11 @@ let vimclojure#ParenRainbow=1
 
 map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
-let NERDTreeIgnore = ['tags', 'yfs1', 'yfs2', '\~$', '\.aux$', '\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$']
+let NERDTreeIgnore = ['tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', '\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$']
 
 
 function! SetPython()
-  call SetTab(4)
+  "call SetTab(4)
   let g:NERDTreeIgnore += ['\.pdf$', '\.tex$', '\.html$', '\.log$', '\.txt$']
 endfunction
 
@@ -229,7 +230,8 @@ function! Txt(width)
   "set syn=txt
   execute "setlocal tw=".a:width
   set ai
-  set formatoptions=tcnqaw
+  "set formatoptions=tcnqaw
+  set formatoptions=tcnqw
 endfunction
 
 set nu
@@ -238,6 +240,7 @@ set ic
 
 
 set grepprg=ack-grep
+"set grepprg=grep
 
 vmap c "+y
 map <leader>v  "+gp
@@ -330,9 +333,9 @@ function! SetJava()
   "setlocal tags+=./tags
   setlocal tags+=/data/prog/java/openjdk-7-source/tags
   setlocal noic
-  "setlocal foldmethod=expr
-  "setlocal foldexpr=getline(v:lnum)[0:5]==\"import\"
-  "setlocal formatoptions-=r
+  setlocal foldmethod=expr
+  setlocal foldexpr=getline(v:lnum)[0:5]==\"import\"
+  setlocal formatoptions-=r
   "syn keyword javaExternal native package
   "setlocal foldmethod=syntax
   "setlocal foldnestmax=2
