@@ -59,7 +59,7 @@ command Txml  :%!tidy -q -i -xml
 set nowrap
 
 "json indent
-map <leader>jt  <Esc>:%!json_xs -f json -t json-pretty<CR>
+map <leader>jt  <Esc>:%!python -m json.tool<CR>
 
 "vimclojure
 let vimclojure#NailgunClient="ng"
@@ -314,6 +314,10 @@ function! SetC()
   setl formatoptions+=ncqaw
 endfunction
 
+function! SetGo()
+  set noet
+endfunction
+
 autocmd BufRead,BufNewFile *.java call SetJava()
 "78
 autocmd BufRead,BufNewFile *.txt,*tex,*.md,README call Txt(80)
@@ -322,6 +326,7 @@ autocmd BufRead,BufNewFile *.txt,*tex,*.md,README call Txt(80)
 autocmd BufRead,BufNewFile *.mail call Txt(72)
 autocmd BufRead,BufNewFile SConstruct :set syn=python
 autocmd BufRead,BufNewFile *.cc,*.cpp,*.c,*.h,*.S call SetC()
+autocmd BufRead,BufNewFile *.go call SetGo()
 "autocmd BufRead,BufNewFile *.lsp so $HOME/.vim/plugin/RainbowParenthsis.vim
 autocmd BufRead,BufNewFile *.py call SetPython()
 
