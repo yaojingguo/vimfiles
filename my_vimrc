@@ -343,7 +343,8 @@ function! SetC()
 endfunction
 
 function! SetGo()
-  set noet
+  "set noet
+	set noic
 endfunction
 
 autocmd BufRead,BufNewFile *.java call SetJava()
