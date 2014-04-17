@@ -301,7 +301,8 @@ function! ST(title)
   let &g:titlestring= a:title . " %t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)"
 endfunction
 
-"tag
+"gotags
+nmap <leader>go :!gotags -R . >tags<CR><CR>
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
