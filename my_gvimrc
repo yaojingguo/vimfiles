@@ -16,6 +16,6 @@ color molokai
 "color ir_black
 "color oceanblack
 "color github
+"
 set guioptions-=m  "remove menu bar
-
 set wrap

@@ -7,7 +7,6 @@ set gfn=Inconsolata\ 17
 "set gfn=Monaco\ 18
 "set gfn=Monospace\ 18
 "set gfn=ProggyClean\ 12
-
 "let g:rehash256 = 1
 "color molokai
 "
@@ -18,6 +17,7 @@ set hls
 execute pathogen#infect()
 
 ab Tablularize Tab
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 "Show filename
 set guitablabel=%M\ %t
@@ -282,12 +282,13 @@ func! Run()
 endfunc
 
 
-let g:SuperTabMappingForward = '<c-space>'
-let g:SuperTabMappingBackward = '<s-c-space>'
+"let g:SuperTabMappingForward = '<c-space>'
+"let g:SuperTabMappingBackward = '<s-c-space>'
 
 
-"imap <c-space> <c-p>
-"imap <c-space> <c-n>
+imap <c-space> <c-p>
+imap <c-space> <c-n>
+imap <C-@> <C-Space>
 
 map! <C-F> <Esc>gUiw`]a
 
