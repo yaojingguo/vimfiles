@@ -1,11 +1,23 @@
 set nocompatible  
-"set gfn=Ubuntu\ Mono\ 18
-set gfn=Monaco\ 16
+"set gfn=Ubuntu\ Mono\ 19 
+"set gfn=Droid\ Sans\ Mono\ 19
+"set gfn=Droid\ Sans\ Mono\ Slashed\ 16
+set gfn=Inconsolata\ 17
+"set gfn=Inconsolata\ Medium\ 17
+"set gfn=Monaco\ 18
 "set gfn=Monospace\ 18
 "set gfn=ProggyClean\ 12
+
+"let g:rehash256 = 1
+"color molokai
+"
+command XXDR %s#^[^:]*: \(\%\(\x\+ \)\+\) .*#\1# | %!xxd -r -p
+
 set hls
 
 execute pathogen#infect()
+
+ab Tablularize Tab
 
 "Show filename
 set guitablabel=%M\ %t
@@ -204,11 +216,11 @@ let vimclojure#ParenRainbow=1
 
 map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
-let NERDTreeIgnore = ['tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', '\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$']
+let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', '\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$']
 
 
 function! SetPython()
-  "call SetTab(4)
+  call SetTab(2)
   let g:NERDTreeIgnore += ['\.pdf$', '\.tex$', '\.html$', '\.log$', '\.txt$']
 endfunction
 
@@ -281,10 +293,14 @@ map! <C-F> <Esc>gUiw`]a
 
 "set tab
 function! SetTab(num) 
+  call SetTabSize(a:num)
+	set expandtab
+endfunction
+
+function! SetTabSize(num)
   execute "set tabstop=".a:num
   execute "set softtabstop=".a:num
   execute "set shiftwidth=".a:num
-	set expandtab
 endfunction
 
 " function! SetLocalTab(num)
@@ -346,6 +362,8 @@ endfunction
 function! SetGo()
   "set noet
 	set noic
+  call SetTabSize(2)
+	set noexpandtab
 endfunction
 
 autocmd BufRead,BufNewFile *.java call SetJava()
@@ -376,6 +394,8 @@ function! SetJava()
   "setlocal foldnestmax=2
   "syntax region foldImports start=/\(^\s*\n^import\)\@<= .\+;/ end=+^\s*$+ transparent fold keepend
 endfunction
+
+let g:godef_split=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "cscope

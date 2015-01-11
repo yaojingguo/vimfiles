@@ -1,9 +1,8 @@
 "win 100 35
 "silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz 
-silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz 
+"silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz 
 "win 1000 1000
 "set lines=999 columns=999
-"color molokai
 "color peaksea
 "color tir_black
 "color inkpot
@@ -13,6 +12,10 @@ silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 """"""""""""""""""""""""""""
 " My favorites
 """"""""""""""""""""""""""""
-color ir_black
+color molokai
+"color ir_black
 "color oceanblack
+"color github
 set guioptions-=m  "remove menu bar
+
+set wrap
