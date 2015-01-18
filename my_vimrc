@@ -2,7 +2,7 @@ set nocompatible
 "set gfn=Ubuntu\ Mono\ 19 
 "set gfn=Droid\ Sans\ Mono\ 19
 "set gfn=Droid\ Sans\ Mono\ Slashed\ 16
-set gfn=Inconsolata\ 17
+set gfn=Inconsolata\ 15
 "set gfn=Inconsolata\ Medium\ 17
 "set gfn=Monaco\ 18
 "set gfn=Monospace\ 18
