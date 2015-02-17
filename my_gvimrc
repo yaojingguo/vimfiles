@@ -12,10 +12,12 @@
 """"""""""""""""""""""""""""
 " My favorites
 """"""""""""""""""""""""""""
-color molokai
+"color molokai
 "color ir_black
 "color oceanblack
 "color github
-"
+
+set background=dark    " Setting dark mode
+color gruvbox
+
 set guioptions-=m  "remove menu bar
-set wrap

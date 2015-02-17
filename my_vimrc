@@ -2,7 +2,7 @@ set nocompatible
 "set gfn=Ubuntu\ Mono\ 19 
 "set gfn=Droid\ Sans\ Mono\ 19
 "set gfn=Droid\ Sans\ Mono\ Slashed\ 16
-set gfn=Inconsolata\ 15
+set gfn=Inconsolata\ 17
 "set gfn=Inconsolata\ Medium\ 17
 "set gfn=Monaco\ 18
 "set gfn=Monospace\ 18
@@ -16,6 +16,49 @@ set hls
 
 execute pathogen#infect()
 
+set wildignore+=node_modules
+set wildignore+=bower_components
+set wildignore+=build-eclipse
+
+"tab page configuration
+map <C-S-]> gt
+map <C-S-[> gT
+map <C-1> 1gt
+map <C-2> 2gt
+map <C-3> 3gt
+map <C-4> 4gt
+map <C-5> 5gt
+map <C-6> 6gt
+map <C-7> 7gt
+map <C-8> 8gt
+map <C-9> 9gt
+map <C-0> :tablast<CR>
+
+
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+command Sc :SyntasticCheck
+command Sr :SyntasticReset
+command St :SyntasticToggleMode
+
+let g:syntastic_html_tidy_exec = '/home/jing/tools/tidy-html5/bin/tidy'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
+let g:syntastic_mode_map = { 'mode': 'passive' }
+"let g:syntastic_mode_map = { 'mode': 'active',
+"                           \ 'passive_filetypes': ['java'] }
+
+
+"ctrlp
+let g:ctrlp_working_path_mode = 'a'
+
+
 ab Tablularize Tab
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
@@ -23,6 +66,26 @@ let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 set guitablabel=%M\ %t
 
 au BufNewFile,BufRead *.cc11,*.h11 set syntax=cpp11
+
+"snippets
+" Track the engine.
+"Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+"Plugin 'honza/vim-snippets'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 
 filetype off
 filetype plugin indent off
@@ -216,7 +279,9 @@ let vimclojure#ParenRainbow=1
 
 map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
-let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', '\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$']
+let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', 
+      \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$', 
+      \'bower_components$', 'node_modules$', 'build-eclipse']
 
 
 function! SetPython()
@@ -385,11 +450,11 @@ function! SetJava()
   "setlocal tags+=/data/prog/java/jdk-6u22-src/tags
   "setlocal tags+=/data/prog/java/openjdk-6-src-b26/jdk/src/share/classes/tags
   "setlocal tags+=./tags
-  setlocal tags+=/data/prog/java/openjdk-7-source/tags
+  setlocal tags+=/data/code/java/1.8.0_25-b17-src/tags
   setlocal noic
-  setlocal foldmethod=expr
-  setlocal foldexpr=getline(v:lnum)[0:5]==\"import\"
-  setlocal formatoptions-=r
+  "setlocal foldmethod=expr
+  "setlocal foldexpr=getline(v:lnum)[0:5]==\"import\"
+  "setlocal formatoptions-=r
   "syn keyword javaExternal native package
   "setlocal foldmethod=syntax
   "setlocal foldnestmax=2
