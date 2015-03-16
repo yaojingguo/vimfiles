@@ -3,6 +3,7 @@ set nocompatible
 "set gfn=Droid\ Sans\ Mono\ 19
 "set gfn=Droid\ Sans\ Mono\ Slashed\ 16
 set gfn=Inconsolata\ 17
+"set gfn=Courier\ New\ 29
 "set gfn=Inconsolata\ Medium\ 17
 "set gfn=Monaco\ 18
 "set gfn=Monospace\ 18
@@ -19,6 +20,7 @@ execute pathogen#infect()
 set wildignore+=node_modules
 set wildignore+=bower_components
 set wildignore+=build-eclipse
+set wildignore+=build
 
 "tab page configuration
 map <C-S-]> gt
@@ -226,7 +228,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " grep the word under the cursor
-map <leader>g :grep <cword><CR>
+"map <leader>g :grep <cword><CR>
 
 " Tab configuration
 map <leader>tn :tabnew<cr>
@@ -316,8 +318,7 @@ set ic
 "set spell
 
 
-set grepprg=ack-grep
-"set grepprg=grep
+"set grepprg=ack-grep
 
 vmap c "+y
 map <leader>v  "+gp
