@@ -21,6 +21,7 @@ set wildignore+=node_modules
 set wildignore+=bower_components
 set wildignore+=build-eclipse
 set wildignore+=build
+set wildignore+=target
 
 "tab page configuration
 map <C-S-]> gt
@@ -136,7 +137,7 @@ command Txml  :%!tidy -q -i -xml
 set nowrap
 
 "json indent
-map <leader>jt  <Esc>:%!python -m json.tool<CR>
+map <leader>jf  <Esc>:%!python -m json.tool<CR>
 
 "vimclojure
 let vimclojure#NailgunClient="ng"
@@ -282,7 +283,7 @@ let vimclojure#ParenRainbow=1
 map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
 let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', 
-      \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$', 
+      \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$', '^target$',
       \'bower_components$', 'node_modules$', 'build-eclipse']
 
 
