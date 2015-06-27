@@ -20,4 +20,7 @@
 set background=dark    " Setting dark mode
 color gruvbox
 
+"set background=light
+"color solarized
+
 set guioptions-=m  "remove menu bar

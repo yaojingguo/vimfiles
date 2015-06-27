@@ -3,3 +3,9 @@ snippet if "" b
 	$1 = #{$1}
 </if>
 endsnippet
+
+snippet aif "" b
+<if test="$1 != null and $1 != ''">
+	and $1 = #{$1}
+</if>
+endsnippet
