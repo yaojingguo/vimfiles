@@ -17,10 +17,16 @@
 "color oceanblack
 "color github
 
-set background=dark    " Setting dark mode
-color gruvbox
+"set background=dark    " Setting dark mode
+"color gruvbox
+"
+"color Tomorrow
+"color Tomorrow-Night
 
-"set background=light
-"color solarized
+set background=dark
+color solarized
 
 set guioptions-=m  "remove menu bar
+
+"set cursorline
+"set cursorcolumn

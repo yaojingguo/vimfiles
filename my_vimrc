@@ -14,7 +14,8 @@ set gfn=Droid\ Sans\ Mono\ Slashed\ 16
 command XXDR %s#^[^:]*: \(\%\(\x\+ \)\+\) .*#\1# | %!xxd -r -p
 
 set hls
-
+"set cursorline
+syntax enable
 set noic
 
 execute pathogen#infect()
@@ -96,14 +97,12 @@ filetype off
 filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
 filetype plugin indent on
-syntax on
 
 function Maximize_Window() 
   silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz 
 endfunction 
 
 "filetype plugin indent on
-"syntax on
 
 function Path(flag)
   if a:flag == 0
@@ -318,7 +317,6 @@ function! Txt(width)
 endfunction
 
 set nu
-set ic
 "set spell
 
 
