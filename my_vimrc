@@ -41,6 +41,14 @@ map <C-9> 9gt
 map <C-0> :tablast<CR>
 
 
+set laststatus=2
+
+" GO
+au Filetype go nnoremap <leader>g :exe "GoDef" <CR>
+au Filetype go nnoremap <leader>gv :vsp <CR>:exe "GoDef" <CR>
+au Filetype go nnoremap <leader>gs :sp <CR>:exe "GoDef"<CR>
+au Filetype go nnoremap <leader>gt :tab split <CR>:exe "GoDef"<CR>
+
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
@@ -164,7 +172,6 @@ set linebreak
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let Tlist_Show_One_File = 1
 
-"cno $ost vimgrep /struct {/ *.[ch]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -229,8 +236,6 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" grep the word under the cursor
-"map <leader>g :grep <cword><CR>
 
 " Tab configuration
 map <leader>tn :tabnew<cr>
@@ -262,12 +267,6 @@ map <leader>cd :cd %:p:h<cr>
 let MRU_Max_Entries = 400
 map <leader>f :MRU<CR>
 
-" Tab configuration
-map <leader>tn :tabnew<cr>
-map <leader>te :tabedit 
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Cope
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -284,7 +283,8 @@ let vimclojure#ParenRainbow=1
 map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
 let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', 
-      \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '^build$', '^buildEclipse$', '^target$',
+      \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$', 
+      \'^buildEclipse$', '^target$',
       \'bower_components$', 'node_modules$', 'build-eclipse']
 
 
@@ -319,8 +319,6 @@ endfunction
 set nu
 "set spell
 
-
-"set grepprg=ack-grep
 
 vmap c "+y
 map <leader>v  "+gp
@@ -590,3 +588,9 @@ function! Find(...)
   execute ":e ".l:line
 endfunction
 command! -nargs=* Find :call Find(<f-args>)
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+noremap <Leader>a :Ack <cword><cr>
