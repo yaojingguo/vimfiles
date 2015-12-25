@@ -12,6 +12,7 @@
 """"""""""""""""""""""""""""
 " My favorites
 """"""""""""""""""""""""""""
+"let g:molokai_original = 1
 "color molokai
 "color ir_black
 "color oceanblack
@@ -23,7 +24,7 @@
 "color Tomorrow
 "color Tomorrow-Night
 
-set background=dark
+set background=light
 color solarized
 
 set guioptions-=m  "remove menu bar
