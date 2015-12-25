@@ -16,3 +16,4 @@ au BufRead,BufNewFile *.bc set filetype=bytecode
 au BufRead,BufNewFile *.pp set filetype=cpp
 au BufNewFile,BufRead *.gradle setf groovy
 au BufNewFile,BufRead *.es6 setf javascript
+au BufNewFile,BufRead *.sbt setf scala
