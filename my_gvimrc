@@ -4,7 +4,10 @@
 "win 1000 1000
 "set lines=999 columns=999
 "color peaksea
+
+" Exactly the same as http://www.vim.org/scripts/download_script.php?src_id=11430
 "color tir_black
+
 "color inkpot
 "color darkspectrum
 "color jellybeans
