@@ -48,26 +48,27 @@ au Filetype go nnoremap <leader>g :exe "GoDef" <CR>
 au Filetype go nnoremap <leader>gv :vsp <CR>:exe "GoDef" <CR>
 au Filetype go nnoremap <leader>gs :sp <CR>:exe "GoDef"<CR>
 au Filetype go nnoremap <leader>gt :tab split <CR>:exe "GoDef"<CR>
+let g:go_fmt_autosave = 0
 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
 
-command Sc :SyntasticCheck
-command Sr :SyntasticReset
-command St :SyntasticToggleMode
 
-let g:syntastic_html_tidy_exec = '/home/jing/tools/tidy-html5/bin/tidy'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-
-let g:syntastic_mode_map = { 'mode': 'passive' }
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntastic is removed since it conflicts with GoReferrers in go-vom.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"command Sc :SyntasticCheck
+"command Sr :SyntasticReset
+"command St :SyntasticToggleMode
+"let g:syntastic_html_tidy_exec = '/home/jing/tools/tidy-html5/bin/tidy'
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 "let g:syntastic_mode_map = { 'mode': 'active',
-"                           \ 'passive_filetypes': ['java'] }
-
+"                           \ 'passive_filetypes': ['java', 'go'] }
 
 "ctrlp
 let g:ctrlp_working_path_mode = 'a'
@@ -383,6 +384,7 @@ function! ST(title)
   "let &g:titlestring=a:title
   let &g:titlestring= a:title . " %t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)"
 endfunction
+
 
 "gotags
 nmap <leader>go :!gotags -R . >tags<CR><CR>

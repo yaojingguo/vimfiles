@@ -27,8 +27,14 @@
 "color Tomorrow
 "color Tomorrow-Night
 
-set background=light
+"color onedark
+"let g:airline_theme='onedark'
+
+
+set background=dark
 color solarized
+ 
+"color railscasts
 
 set guioptions-=m  "remove menu bar
 
