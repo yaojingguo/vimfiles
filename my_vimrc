@@ -1,8 +1,8 @@
 set nocompatible  
 "set gfn=Ubuntu\ Mono\ 19 
 "set gfn=Droid\ Sans\ Mono\ 19
-set gfn=Droid\ Sans\ Mono\ Slashed\ 16
-"set gfn=Inconsolata\ 17
+"set gfn=Droid\ Sans\ Mono\ Slashed\ 16
+set gfn=Inconsolata\ 16
 "set gfn=Courier\ New\ 29
 "set gfn=Inconsolata\ Medium\ 17
 "set gfn=Monaco\ 18
@@ -155,7 +155,8 @@ let vimclojure#NailgunClient="ng"
 map <leader>ng :let vimclojure#WantNailgun=1<CR>
 
 "nerdcommenter
-let NERDRemoveExtraSpaces=0
+"let NERDRemoveExtraSpaces=0
+let NERDSpaceDelims=1
 
 "latex-suite
 "let g:Tex_DefaultTargetFormat='pdf'
@@ -428,13 +429,6 @@ function! SetC()
   setl formatoptions+=ncqa
 endfunction
 
-function! SetGo()
-  "set noet
-	set noic
-  call SetTabSize(2)
-	set noexpandtab
-endfunction
-
 autocmd BufRead,BufNewFile *.java call SetJava()
 "78
 autocmd BufRead,BufNewFile *.txt,*tex,*.md,README call Txt(80)
@@ -443,7 +437,6 @@ autocmd BufRead,BufNewFile *.txt,*tex,*.md,README call Txt(80)
 autocmd BufRead,BufNewFile *.mail call Txt(70)
 autocmd BufRead,BufNewFile SConstruct :set syn=python
 autocmd BufRead,BufNewFile *.cc,*.cpp,*.c,*.h,*.S call SetC()
-autocmd BufRead,BufNewFile *.go call SetGo()
 "autocmd BufRead,BufNewFile *.lsp so $HOME/.vim/plugin/RainbowParenthsis.vim
 autocmd BufRead,BufNewFile *.py call SetPython()
 
