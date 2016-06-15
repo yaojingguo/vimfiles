@@ -1,11 +1,11 @@
 set nocompatible  
-"set gfn=Ubuntu\ Mono\ 19 
+set gfn=Ubuntu\ Mono\ 18
 "set gfn=Droid\ Sans\ Mono\ 19
 "set gfn=Droid\ Sans\ Mono\ Slashed\ 16
-set gfn=Inconsolata\ 16
+"set gfn=Inconsolata\ 16
 "set gfn=Courier\ New\ 29
 "set gfn=Inconsolata\ Medium\ 17
-"set gfn=Monaco\ 18
+" set gfn=Monaco\ 16
 "set gfn=Monospace\ 16
 "set gfn=ProggyClean\ 12
 "let g:rehash256 = 1
@@ -48,7 +48,21 @@ au Filetype go nnoremap <leader>g :exe "GoDef" <CR>
 au Filetype go nnoremap <leader>gv :vsp <CR>:exe "GoDef" <CR>
 au Filetype go nnoremap <leader>gs :sp <CR>:exe "GoDef"<CR>
 au Filetype go nnoremap <leader>gt :tab split <CR>:exe "GoDef"<CR>
-let g:go_fmt_autosave = 0
+" let g:go_fmt_autosave = 0
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_build_constraints = 1
+autocmd FileType go set number fo+=croq tw=100
+autocmd Filetype go set makeprg=go\ build\ .
+let g:go_fmt_options = '-s'
+
+
+let g:airline_extensions = []
+" let g:airline#extensions#syntastic#enabled = 0
+
+
 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
@@ -110,8 +124,6 @@ filetype plugin indent on
 function Maximize_Window() 
   silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz 
 endfunction 
-
-"filetype plugin indent on
 
 function Path(flag)
   if a:flag == 0
@@ -372,12 +384,12 @@ function! SetTabSize(num)
   execute "set shiftwidth=".a:num
 endfunction
 
-" function! SetLocalTab(num)
-"   execute "setlocal tabstop=".a:num
-"   execute "setlocal softtabstop=".a:num
-"   execute "setlocal shiftwidth=".a:num
-"   set expandtab
-" endfunction
+function! SetLocalTab(num)
+  execute "setlocal tabstop=".a:num
+  execute "setlocal softtabstop=".a:num
+  execute "setlocal shiftwidth=".a:num
+  set expandtab
+endfunction
 
 call SetTab(2)
 
@@ -422,7 +434,7 @@ let g:tagbar_type_go = {
 "set formatlistpat=^\\s*\\*?\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 
 function! SetC()
-  "call SetTab(2)
+  call SetLocalTab(4)
   setlocal noic
   setl formatoptions-=ro " not to automatically insert comment leader
   setl formatoptions-=t
@@ -441,10 +453,8 @@ autocmd BufRead,BufNewFile *.cc,*.cpp,*.c,*.h,*.S call SetC()
 autocmd BufRead,BufNewFile *.py call SetPython()
 
 function! SetJava()
-  "call SetTab(4)
+  call SetLocalTab(2)
   setlocal tw=80
-  "setlocal tags+=/data/prog/java/jdk-6u22-src/tags
-  "setlocal tags+=/data/prog/java/openjdk-6-src-b26/jdk/src/share/classes/tags
   "setlocal tags+=./tags
   setlocal tags+=/data/code/java/1.8.0_25-b17-src/tags
   setlocal noic
@@ -584,8 +594,8 @@ function! Find(...)
 endfunction
 command! -nargs=* Find :call Find(<f-args>)
 
+" ack.vim
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-
 noremap <Leader>a :Ack <cword><cr>

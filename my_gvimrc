@@ -28,7 +28,7 @@
 "color Tomorrow-Night
 
 "color onedark
-"let g:airline_theme='onedark'
+" let g:airline_theme='onedark'
 
 
 set background=dark
