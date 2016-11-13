@@ -28,9 +28,11 @@
 "color Tomorrow-Night
 
 "color onedark
-" let g:airline_theme='onedark'
+let g:airline_theme='onedark'
 
 
+"set background=dark
+" let g:solarized_italic=0
 set background=dark
 color solarized
  
@@ -38,5 +40,5 @@ color solarized
 
 set guioptions-=m  "remove menu bar
 
-"set cursorline
+set cursorline
 "set cursorcolumn

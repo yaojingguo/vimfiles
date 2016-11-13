@@ -17,5 +17,6 @@ au BufRead,BufNewFile *.pp set filetype=cpp
 au BufNewFile,BufRead *.gradle setf groovy
 au BufNewFile,BufRead *.es6 setf javascript
 au BufNewFile,BufRead *.sbt setf scala
-
 au BufNewFile,BufRead *.flex setf lex
+au BufNewFile,BufRead *.cl set filetype=txt 
+au BufNewFile,BufRead *.mips set filetype=mips

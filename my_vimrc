@@ -1,17 +1,21 @@
-set nocompatible  
+set nocompatible
 set gfn=Ubuntu\ Mono\ 18
 "set gfn=Droid\ Sans\ Mono\ 19
 "set gfn=Droid\ Sans\ Mono\ Slashed\ 16
 "set gfn=Inconsolata\ 16
 "set gfn=Courier\ New\ 29
 "set gfn=Inconsolata\ Medium\ 17
-" set gfn=Monaco\ 16
+"set gfn=Monaco\ 16
 "set gfn=Monospace\ 16
 "set gfn=ProggyClean\ 12
 "let g:rehash256 = 1
 "color molokai
 "
 command XXDR %s#^[^:]*: \(\%\(\x\+ \)\+\) .*#\1# | %!xxd -r -p
+
+
+let g:vimtex_quickfix_ignore_all_warnings=1
+
 
 set hls
 "set cursorline
@@ -54,7 +58,7 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_build_constraints = 1
-autocmd FileType go set number fo+=croq tw=100
+autocmd FileType go set number fo+=croq tw=80
 autocmd Filetype go set makeprg=go\ build\ .
 let g:go_fmt_options = '-s'
 
@@ -94,7 +98,6 @@ let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 "Show filename
 set guitablabel=%M\ %t
 
-au BufNewFile,BufRead *.cc11,*.h11 set syntax=cpp11
 
 "snippets
 " Track the engine.
@@ -121,9 +124,9 @@ filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
 filetype plugin indent on
 
-function Maximize_Window() 
-  silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz 
-endfunction 
+function Maximize_Window()
+  silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+endfunction
 
 function Path(flag)
   if a:flag == 0
@@ -172,11 +175,11 @@ let NERDSpaceDelims=1
 
 "latex-suite
 "let g:Tex_DefaultTargetFormat='pdf'
-"noremap <silent> <D-V> <Esc>:BuildAndViewTexPdf<CR> 
-"inoremap <silent> <D-V> <Esc>:BuildAndViewTexPdf<CR> 
-"noremap <silent> <D-T> <Esc>:BuildTexPdf<CR> 
-"inoremap <silent> <D-T> <Esc>:BuildTexPdf<CR> 
-let g:tex_pdf_map_leader_keys = 0 
+"noremap <silent> <D-V> <Esc>:BuildAndViewTexPdf<CR>
+"inoremap <silent> <D-V> <Esc>:BuildAndViewTexPdf<CR>
+"noremap <silent> <D-T> <Esc>:BuildTexPdf<CR>
+"inoremap <silent> <D-T> <Esc>:BuildTexPdf<CR>
+"let g:tex_pdf_map_leader_keys = 0
 
 "set splitbelow
 set linebreak
@@ -190,10 +193,10 @@ let Tlist_Show_One_File = 1
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Smart mappings on the command line
-cno $og cs find g 
-cno $o cs find 
-cno $so cs find 
-cno $vo cs find 
+cno $og cs find g
+cno $o cs find
+cno $so cs find
+cno $vo cs find
 cno $h e ~/
 "cno $d e ~/Desktop/
 cno $j e ./
@@ -212,7 +215,7 @@ cnoremap <C-N> <Down>
 
 func! Cwd()
   let cwd = getcwd()
-  return "e " . cwd 
+  return "e " . cwd
 endfunc
 
 func! DeleteTillSlash()
@@ -228,7 +231,7 @@ func! DeleteTillSlash()
     else
       let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
     endif
-  endif   
+  endif
   return g:cmd_edited
 endfunc
 
@@ -253,7 +256,7 @@ map <C-l> <C-W>l
 
 " Tab configuration
 map <leader>tn :tabnew<cr>
-map <leader>te :tabedit 
+map <leader>te :tabedit
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove<cr>
 
@@ -296,8 +299,8 @@ let vimclojure#ParenRainbow=1
 
 map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
-let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', 
-      \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$', 
+let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$',
+      \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$',
       \'^buildEclipse$', '^target$',
       \'bower_components$', 'node_modules$', 'build-eclipse']
 
@@ -321,7 +324,7 @@ command! -complete=dir -nargs=* Rft :call ResetFuzzy(<f-args>)
 "map <leader>t :FuzzyFinderTextMate<CR>
 
 
-function! Txt(width) 
+function! Txt(width)
   "set syn=txt
   execute "setlocal tw=".a:width
   set ai
@@ -352,7 +355,7 @@ set makeprg=g++\ -pthread\ %
 map <F5> :call Compile()<CR>
 map <F7> :call Run()<CR>
 
-func! Compile() 
+func! Compile()
   exec "w"
   exec "make"
 endfunc
@@ -373,7 +376,7 @@ imap <C-@> <C-Space>
 map! <C-F> <Esc>gUiw`]a
 
 "set tab
-function! SetTab(num) 
+function! SetTab(num)
   call SetTabSize(a:num)
 	set expandtab
 endfunction
@@ -393,7 +396,7 @@ endfunction
 
 call SetTab(2)
 
-function! ST(title) 
+function! ST(title)
   "let &g:titlestring=a:title
   let &g:titlestring= a:title . " %t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)"
 endfunction
@@ -434,23 +437,20 @@ let g:tagbar_type_go = {
 "set formatlistpat=^\\s*\\*?\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 
 function! SetC()
-  call SetLocalTab(4)
+  " call SetLocalTab(2)
   setlocal noic
   setl formatoptions-=ro " not to automatically insert comment leader
   setl formatoptions-=t
-  setl formatoptions+=ncqa
+  setl formatoptions+=ncq
 endfunction
 
 autocmd BufRead,BufNewFile *.java call SetJava()
-"78
 autocmd BufRead,BufNewFile *.txt,*tex,*.md,README call Txt(80)
-
-"70
 autocmd BufRead,BufNewFile *.mail call Txt(70)
 autocmd BufRead,BufNewFile SConstruct :set syn=python
 autocmd BufRead,BufNewFile *.cc,*.cpp,*.c,*.h,*.S call SetC()
-"autocmd BufRead,BufNewFile *.lsp so $HOME/.vim/plugin/RainbowParenthsis.vim
 autocmd BufRead,BufNewFile *.py call SetPython()
+autocmd BufNewFile,BufRead *.cc11,*.h11 set syntax=cpp11
 
 function! SetJava()
   call SetLocalTab(2)
@@ -473,7 +473,7 @@ let g:godef_split=0
 "cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function! CreateScope() 
+function! CreateScope()
   "!find -name '*.[chsS]' > cscope.files
 	"!cscope -b -k -q
   "!cscope -b -q
@@ -497,9 +497,9 @@ if has("cscope")
 
   nmap <leader>or :call CreateScope()<CR><CR>
 
-  nmap <leader>ox :cs find 
-  nmap <leader>sox :cs find 
-  nmap <leader>vox :cs find 
+  nmap <leader>ox :cs find
+  nmap <leader>sox :cs find
+  nmap <leader>vox :cs find
 
   " mapping
   nmap <leader>os :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -556,7 +556,7 @@ map <Leader>cd :exe 'cd ' . expand ("%:p:h")<CR>
 nmap <Leader>vx <Leader>cd:%w !xmllint --noout -<CR>
 nmap <Leader>px :%!xmllint --format -<CR>
 
-"set Find 
+"set Find
 function! Find(...)
   if a:0==2
     let path=a:1
