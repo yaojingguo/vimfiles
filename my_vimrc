@@ -24,6 +24,9 @@ set noic
 
 execute pathogen#infect()
 
+syntax on
+filetype plugin indent on
+
 set wildignore+=node_modules
 set wildignore+=bower_components
 set wildignore+=build-eclipse
@@ -118,11 +121,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-
-filetype off
-filetype plugin indent off
-set runtimepath+=$GOROOT/misc/vim
-filetype plugin indent on
 
 function Maximize_Window()
   silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz

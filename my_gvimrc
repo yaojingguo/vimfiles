@@ -27,18 +27,16 @@
 "color Tomorrow
 "color Tomorrow-Night
 
-"color onedark
+color onedark
 let g:airline_theme='onedark'
 
 
 "set background=dark
 " let g:solarized_italic=0
-set background=dark
-color solarized
+" set background=dark
+" color solarized
  
 "color railscasts
 
 set guioptions-=m  "remove menu bar
-
 set cursorline
-"set cursorcolumn
