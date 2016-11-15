@@ -27,6 +27,7 @@
 "color Tomorrow
 "color Tomorrow-Night
 
+let g:onedark_termcolors=16
 color onedark
 let g:airline_theme='onedark'
 
