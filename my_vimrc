@@ -13,7 +13,7 @@ set gfn=Ubuntu\ Mono\ 18
 "
 command XXDR %s#^[^:]*: \(\%\(\x\+ \)\+\) .*#\1# | %!xxd -r -p
 
-
+" let g:vimtex_enabled=0
 let g:vimtex_quickfix_ignore_all_warnings=1
 
 
@@ -56,6 +56,7 @@ au Filetype go nnoremap <leader>gv :vsp <CR>:exe "GoDef" <CR>
 au Filetype go nnoremap <leader>gs :sp <CR>:exe "GoDef"<CR>
 au Filetype go nnoremap <leader>gt :tab split <CR>:exe "GoDef"<CR>
 " let g:go_fmt_autosave = 0
+let g:go_asmfmt_autosave = 0
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
