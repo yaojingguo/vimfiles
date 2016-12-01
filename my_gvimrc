@@ -31,12 +31,11 @@
 " let g:airline_theme='onedark'
 " color onedark
 
+"color railscasts
 
 " let g:solarized_italic=0
 set background=dark
 color solarized
  
-"color railscasts
-
 set guioptions-=m  "remove menu bar
 set cursorline

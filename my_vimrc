@@ -94,10 +94,11 @@ let g:airline_extensions = []
 
 "ctrlp
 let g:ctrlp_working_path_mode = 'a'
+let g:ctrlp_follow_symlinks = 2
 
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 ab Tablularize Tab
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 "Show filename
 set guitablabel=%M\ %t
