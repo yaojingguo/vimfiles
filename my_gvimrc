@@ -23,19 +23,21 @@
 
 "set background=dark    " Setting dark mode
 "color gruvbox
-"
-"color Tomorrow
-"color Tomorrow-Night
 
 " let g:onedark_termcolors=16
 " let g:airline_theme='onedark'
 " color onedark
 
-"color railscasts
 
 " let g:solarized_italic=0
 set background=dark
 color solarized
+
+" let g:airline_theme='one'
+" colorscheme one
+" let g:one_allow_italics = 1 " I love italic for comments
+" set background=dark " for the dark version
+" set background=light " for the light version
  
 set guioptions-=m  "remove menu bar
 set cursorline
