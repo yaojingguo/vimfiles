@@ -21,4 +21,3 @@ au BufNewFile,BufRead *.flex setf lex
 au BufNewFile,BufRead *.cl set filetype=txt 
 au BufNewFile,BufRead *.clj set filetype=clojure
 au BufNewFile,BufRead *.asm set filetype=mips
-au BufNewFile,BufRead *.s set filetype=mips

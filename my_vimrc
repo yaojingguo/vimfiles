@@ -1,5 +1,5 @@
 set nocompatible
-set gfn=Ubuntu\ Mono\ 18
+set gfn=Ubuntu\ Mono\ 20
 "set gfn=Droid\ Sans\ Mono\ 19
 "set gfn=Droid\ Sans\ Mono\ Slashed\ 16
 "set gfn=Inconsolata\ 16
@@ -21,6 +21,7 @@ set hls
 "set cursorline
 syntax enable
 set noic
+set autoread
 
 execute pathogen#infect()
 
@@ -301,7 +302,7 @@ map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
 let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$',
       \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$',
-      \'^buildEclipse$', '^target$',
+      \'^buildEclipse$', '^target$', '\.class$',
       \'bower_components$', 'node_modules$', 'build-eclipse']
 
 
@@ -391,7 +392,7 @@ function! SetLocalTab(num)
   execute "setlocal tabstop=".a:num
   execute "setlocal softtabstop=".a:num
   execute "setlocal shiftwidth=".a:num
-  set expandtab
+	set expandtab
 endfunction
 
 call SetTab(2)
@@ -599,3 +600,5 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 noremap <Leader>a :Ack <cword><cr>
+
+au BufNewFile,BufRead *.s set filetype=mips
