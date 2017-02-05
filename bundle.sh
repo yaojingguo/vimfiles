@@ -3,7 +3,6 @@
 plugin_names=(
   "mileszs/ack.vim.git"
   "ctrlpvim/ctrlp.vim.git"
-  "zenorocha/dracula-theme.git"
   "morhetz/gruvbox.git"
   "fatih/molokai.git"
   "scrooloose/nerdcommenter.git"
@@ -36,5 +35,6 @@ do
   git clone "https://github.com/$name"
 done
 
+git clone "https://github.com/dracula/vim.git dracula-theme"
 git clone "git@github.com:yaojingguo/vim-snippets.git"
 git clone "git@github.com:yaojingguo/ir_black.git"
