@@ -1,11 +1,11 @@
 set nocompatible
-set gfn=Ubuntu\ Mono\ 20
+" set gfn=Ubuntu\ Mono\ 20
 "set gfn=Droid\ Sans\ Mono\ 19
 "set gfn=Droid\ Sans\ Mono\ Slashed\ 16
 "set gfn=Inconsolata\ 16
 "set gfn=Courier\ New\ 29
 "set gfn=Inconsolata\ Medium\ 17
-"set gfn=Monaco\ 16
+set gfn=Monaco:h20
 "set gfn=Monospace\ 16
 "set gfn=ProggyClean\ 12
 "let g:rehash256 = 1
