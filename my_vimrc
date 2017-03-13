@@ -16,7 +16,6 @@ command XXDR %s#^[^:]*: \(\%\(\x\+ \)\+\) .*#\1# | %!xxd -r -p
 " let g:vimtex_enabled=0
 let g:vimtex_quickfix_ignore_all_warnings=1
 
-
 set hls
 "set cursorline
 syntax enable
@@ -48,7 +47,6 @@ map <C-8> 8gt
 map <C-9> 9gt
 map <C-0> :tablast<CR>
 
-
 set laststatus=2
 
 " GO
@@ -70,7 +68,6 @@ let g:go_fmt_options = '-s'
 
 let g:airline_extensions = []
 " let g:airline#extensions#syntastic#enabled = 0
-
 
 
 "set statusline+=%#warningmsg#
@@ -104,14 +101,8 @@ ab Tablularize Tab
 "Show filename
 set guitablabel=%M\ %t
 
-
 "snippets
-" Track the engine.
-"Plugin 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
-"Plugin 'honza/vim-snippets'
-
+let g:UltiSnipsUsePythonVersion = 2
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -123,7 +114,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-
 
 function Maximize_Window()
   silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
