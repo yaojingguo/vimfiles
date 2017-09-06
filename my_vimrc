@@ -297,7 +297,7 @@ let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$',
 
 
 function! SetPython()
-  call SetTab(2)
+  call SetTab(4)
   let g:NERDTreeIgnore += ['\.pdf$', '\.tex$', '\.html$', '\.log$', '\.txt$']
 endfunction
 
