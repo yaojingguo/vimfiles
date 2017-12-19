@@ -17,7 +17,6 @@ plugin_names=(
   "altercation/vim-colors-solarized.git"
   "tpope/vim-fugitive.git"
   "fatih/vim-go.git"
-  "dgryski/vim-godef"
   "tfnico/vim-gradle"
   "pangloss/vim-javascript.git"
   "tpope/vim-markdown.git"
