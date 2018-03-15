@@ -17,6 +17,8 @@ command XXDR %s#^[^:]*: \(\%\(\x\+ \)\+\) .*#\1# | %!xxd -r -p
 " let g:vimtex_enabled=0
 let g:vimtex_quickfix_ignore_all_warnings=1
 
+set mmp=2000
+
 set hls
 "set cursorline
 syntax enable
@@ -58,7 +60,7 @@ set laststatus=2
 au Filetype go nnoremap <leader>g :GoReferrers<CR>
 " let g:go_fmt_autosave = 0
 let g:go_asmfmt_autosave = 0
-let g:go_def_mode = 'godef'
+" let g:go_def_mode = 'godef'
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -158,7 +160,7 @@ command Txml  :%!tidy -q -i -xml
 set nowrap
 
 "json indent
-map <leader>jf  <Esc>:%!python -m json.tool<CR>
+map <leader>jf  <Esc>:%!python3 -m json.tool<CR>
 
 "vimclojure
 let vimclojure#NailgunClient="ng"
@@ -307,7 +309,7 @@ function! SetPython()
 endfunction
 
 
-set wildignore+=*.o,*.obj,.git,*.class,*.hi,CVS
+set wildignore+=*.o,*.obj,.git,*.class,*.hi,CVS,*.d
 
 set guioptions-=T
 
