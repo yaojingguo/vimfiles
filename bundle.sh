@@ -3,7 +3,6 @@
 plugin_names=(
   "mileszs/ack.vim.git"
   "ctrlpvim/ctrlp.vim.git"
-  "morhetz/gruvbox.git"
   "fatih/molokai.git"
   "scrooloose/nerdcommenter.git"
   "scrooloose/nerdtree.git"
