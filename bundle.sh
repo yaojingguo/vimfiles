@@ -21,12 +21,12 @@ plugin_names=(
   "pangloss/vim-javascript.git"
   "tpope/vim-markdown.git"
   "Harenome/vim-mipssyntax.git"
-  "rakr/vim-one.git"
   "jpo/vim-railscasts-theme.git"
   "derekwyatt/vim-scala.git"
   "lervag/vimtex.git"
   "majutsushi/tagbar.git"
   "FelikZ/ctrlp-py-matcher.git"
+  "honza/vim-snippets"
 )
 
 for name in "${plugin_names[@]}"
@@ -35,5 +35,4 @@ do
   git clone "https://github.com/$name"
 done
 
-git clone "git@github.com:yaojingguo/vim-snippets.git"
 git clone "git@github.com:yaojingguo/ir_black.git"

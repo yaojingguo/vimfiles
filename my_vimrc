@@ -5,13 +5,16 @@ set nocompatible
 "set gfn=Inconsolata\ 16
 "set gfn=Courier\ New\ 29
 "set gfn=Inconsolata\ Medium\ 17
-"set gfn=Monaco:h20
-set gfn=Monaco:h18
+set gfn=Monaco:h19
 "set gfn=Monospace\ 16
 "set gfn=ProggyClean\ 12
 "let g:rehash256 = 1
 "color molokai
 "
+
+" set macligatures
+" set guifont=Fira\ Code:h19
+
 command XXDR %s#^[^:]*: \(\%\(\x\+ \)\+\) .*#\1# | %!xxd -r -p
 
 " let g:vimtex_enabled=0
@@ -35,6 +38,8 @@ set wildignore+=bower_components
 set wildignore+=build-eclipse
 set wildignore+=build
 set wildignore+=target
+
+
 
 "tab page configuration
 map <C-S-]> gt
@@ -60,17 +65,35 @@ set laststatus=2
 au Filetype go nnoremap <leader>g :GoReferrers<CR>
 " let g:go_fmt_autosave = 0
 let g:go_asmfmt_autosave = 0
-" let g:go_def_mode = 'godef'
+let g:go_def_mode = 'godef'
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_build_constraints = 1
+" let g:go_highlight_fields = 1
 autocmd FileType go set number fo+=croq tw=80
 autocmd Filetype go set makeprg=go\ build\ .
-let g:go_fmt_options = '-s'
-let g:go_build_tags = 'go1.9'
 
+" let g:go_fmt_command = "goimports"
+let g:go_fmt_options = {
+  \ 'gofmt': '-s',
+  \ }
+
+" let g:go_fmt_options = {
+"   \ 'gofmt': '-s',
+"   \ 'goimports': '-w',
+"   \ }
+
+
+nnoremap <C-A> :CtrlPBuffer<CR>
+nnoremap <C-S> :CtrlPMRU<CR>
+
+"This returns the 1-based offset in file, which is the same as %o in
+"statusline. For details, refer to https://vi.stackexchange.com/a/3850/15649
+function! FileOffset()
+  return line2byte(line('.')) + col('.') - 1
+endfunction
 
 
 let g:airline_extensions = []
@@ -204,12 +227,11 @@ cno $c e <C-\>eCurrentFileDir("e")<cr>
 cno $q <C-\>eDeleteTillSlash()<cr>
 
 " Bash like keys for the command line
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
-cnoremap <C-K> <C-U>
-
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
+" cnoremap <C-A> <Home>
+" cnoremap <C-E> <End>
+" cnoremap <C-K> <C-U>
+" cnoremap <C-P> <Up>
+" cnoremap <C-N> <Down>
 
 func! Cwd()
   let cwd = getcwd()
@@ -435,7 +457,7 @@ let g:tagbar_type_go = {
 "set formatlistpat=^\\s*\\*?\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 
 function! SetC()
-  " call SetLocalTab(2)
+  call SetLocalTab(4)
   setlocal noic
   setl formatoptions-=ro " not to automatically insert comment leader
   setl formatoptions-=t

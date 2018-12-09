@@ -29,15 +29,15 @@
 " color onedark
 
 
-" let g:solarized_italic=0
+let g:solarized_italic=0
 set background=dark
 color solarized
 
-" let g:airline_theme='one'
-" colorscheme one
-" let g:one_allow_italics = 1 " I love italic for comments
-" set background=dark " for the dark version
-" set background=light " for the light version
- 
+" for vim 8
+" if (has("termguicolors"))
+"   set termguicolors
+" endif
+" colorscheme OceanicNext
+
 set guioptions-=m  "remove menu bar
 set cursorline
