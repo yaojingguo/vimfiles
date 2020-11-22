@@ -39,7 +39,56 @@ syntax enable
 "set ic
 set autoread
 
-execute pathogen#infect()
+" execute pathogen#infect()
+filetype off                  " required
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'mhartington/oceanic-next'
+Plugin 'joshdick/onedark.vim'
+Plugin 'sonph/onehalf'
+Plugin 'luochen1990/rainbow'
+Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'majutsushi/tagbar'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'tpope/vim-abolish'
+Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tikhomirov/vim-glsl'
+Plugin 'fatih/vim-go'
+Plugin 'tfnico/vim-gradle'
+Plugin 'pangloss/vim-javascript'
+Plugin 'MaxMEllon/vim-jsx-pretty'
+Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'tpope/vim-markdown'
+Plugin 'Harenome/vim-mipssyntax'
+Plugin 'jceb/vim-orgmode'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-speeddating'
+Plugin 'lervag/vimtex'
+Plugin 'HerringtonDarkholme/yats.vim'
+Plugin 'yaojingguo/ir_black'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+
 
 filetype plugin indent on
 syntax on
