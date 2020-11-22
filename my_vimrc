@@ -1,12 +1,21 @@
 set nocompatible
 " set gfn=Ubuntu\ Mono\ 20
 "set gfn=Droid\ Sans\ Mono\ 19
-"set gfn=Droid\ Sans\ Mono\ Slashed\ 16
+"set gfn=Droid\ Sans\ Mono\ Slashed\ 19
 "set gfn=Inconsolata\ 16
 "set gfn=Courier\ New\ 29
 "set gfn=Inconsolata\ Medium\ 17
-set gfn=Monaco:h19
-"set gfn=Monospace\ 16
+
+" Works for vim. But does not work for mvim.
+"set gfn=RobotoMonoForPowerline:h19
+
+"set gfn=RobotoMonoForPowerline-Light:h17
+"set gfn=RobotoMonoForPowerline-Regular:h17
+"set gfn=SourceCodeProForPowerline-Regular:h17
+"set gfn=FiraCode-Regular:h17
+set gfn=Fira\ Code\ Retina:h17
+"set gfn=Monaco:h18
+" set gfn=Monospace:h16
 "set gfn=ProggyClean\ 12
 "let g:rehash256 = 1
 "color molokai
@@ -20,18 +29,20 @@ command XXDR %s#^[^:]*: \(\%\(\x\+ \)\+\) .*#\1# | %!xxd -r -p
 " let g:vimtex_enabled=0
 let g:vimtex_quickfix_ignore_all_warnings=1
 
+let g:rainbow_active = 1
+
 set mmp=2000
 
 set hls
 "set cursorline
 syntax enable
-set noic
+"set ic
 set autoread
 
 execute pathogen#infect()
 
-syntax on
 filetype plugin indent on
+syntax on
 
 set wildignore+=node_modules
 set wildignore+=bower_components
@@ -57,6 +68,8 @@ map <C-0> :tablast<CR>
 
 set laststatus=2
 
+set scroll=10
+
 " GO
 " au Filetype go nnoremap <leader>g :exe "GoDef" <CR>
 " au Filetype go nnoremap <leader>gv :vsp <CR>:exe "GoDef" <CR>
@@ -65,7 +78,7 @@ set laststatus=2
 au Filetype go nnoremap <leader>g :GoReferrers<CR>
 " let g:go_fmt_autosave = 0
 let g:go_asmfmt_autosave = 0
-let g:go_def_mode = 'godef'
+" let g:go_def_mode = 'godef'
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -132,18 +145,14 @@ ab Tablularize Tab
 set guitablabel=%M\ %t
 
 "snippets
-let g:UltiSnipsUsePythonVersion = 2
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
 
 function Maximize_Window()
   silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
@@ -192,7 +201,7 @@ map <leader>ng :let vimclojure#WantNailgun=1<CR>
 
 "nerdcommenter
 "let NERDRemoveExtraSpaces=0
-let NERDSpaceDelims=1
+ let NERDSpaceDelims=1
 
 "latex-suite
 "let g:Tex_DefaultTargetFormat='pdf'
@@ -462,6 +471,8 @@ function! SetC()
   setl formatoptions-=ro " not to automatically insert comment leader
   setl formatoptions-=t
   setl formatoptions+=ncq
+
+  setl tw=100
 endfunction
 
 autocmd BufRead,BufNewFile *.java call SetJava()
@@ -472,12 +483,14 @@ autocmd BufRead,BufNewFile *.cc,*.cpp,*.c,*.h,*.S call SetC()
 autocmd BufRead,BufNewFile *.py call SetPython()
 autocmd BufNewFile,BufRead *.cc11,*.h11 set syntax=cpp11
 autocmd BufNewFile,BufRead *.tla set syntax=tla
+autocmd BufNewFile,BufRead *.vs,*.fs set syntax=glsl
+
 
 function! SetJava()
   call SetLocalTab(2)
   setlocal tw=80
   "setlocal tags+=./tags
-  setlocal tags+=/data/code/java/1.8.0_25-b17-src/tags
+  setlocal tags+=/Users/jing/code/github/languages/java/jdk1.8.0_162-src/tags
   setlocal noic
   "setlocal foldmethod=expr
   "setlocal foldexpr=getline(v:lnum)[0:5]==\"import\"
@@ -493,6 +506,7 @@ let g:godef_split=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set cscopetag
 
 function! CreateScope()
   "!find -name '*.[chsS]' > cscope.files
