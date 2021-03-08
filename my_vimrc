@@ -13,7 +13,7 @@ set nocompatible
 "set gfn=RobotoMonoForPowerline-Regular:h17
 "set gfn=SourceCodeProForPowerline-Regular:h17
 "set gfn=FiraCode-Regular:h17
-set gfn=Fira\ Code\ Retina:h17
+set gfn=Fira\ Code\ Retina:h16
 "set gfn=Monaco:h18
 " set gfn=Monospace:h16
 "set gfn=ProggyClean\ 12
@@ -27,7 +27,7 @@ set gfn=Fira\ Code\ Retina:h17
 command XXDR %s#^[^:]*: \(\%\(\x\+ \)\+\) .*#\1# | %!xxd -r -p
 
 " let g:vimtex_enabled=0
-let g:vimtex_quickfix_ignore_all_warnings=1
+" let g:vimtex_quickfix_ignore_all_warnings=1
 
 let g:rainbow_active = 1
 
@@ -85,9 +85,28 @@ Plugin 'lervag/vimtex'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'yaojingguo/ir_black'
 
+" Add homebrew fzf to the vim path:
+set rtp+=/usr/local/opt/fzf
+Plugin 'junegunn/fzf.vim'
+
+
+" Add maktaba and codefmt to the runtimepath.
+" (The latter must be installed before it can be used.)
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
+" Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage.
+Plugin 'google/vim-glaive'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
+" the glaive#Install() should go after the "call vundle#end()"
+call glaive#Install()
+" Optional: Enable codefmt's default mappings on the <Leader>= prefix.
+Glaive codefmt plugin[mappings]
+Glaive codefmt google_java_executable="java -jar /Users/jing/tools/google-java-format-1.9-all-deps.jar"
+Glaive codefmt clang_format_style="google"
 
 
 filetype plugin indent on
@@ -251,6 +270,7 @@ map <leader>ng :let vimclojure#WantNailgun=1<CR>
 "nerdcommenter
 "let NERDRemoveExtraSpaces=0
  let NERDSpaceDelims=1
+" autocmd BufEnter * NERDTreeMirror
 
 "latex-suite
 "let g:Tex_DefaultTargetFormat='pdf'
@@ -377,8 +397,8 @@ let vimclojure#ParenRainbow=1
 
 map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
-let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$',
-      \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$',
+let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', '\.eps$'
+      \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '\.o$',
       \'^buildEclipse$', '^target$', '\.class$',
       \'bower_components$', 'node_modules$', 'build-eclipse']
 
@@ -533,6 +553,7 @@ autocmd BufRead,BufNewFile *.py call SetPython()
 autocmd BufNewFile,BufRead *.cc11,*.h11 set syntax=cpp11
 autocmd BufNewFile,BufRead *.tla set syntax=tla
 autocmd BufNewFile,BufRead *.vs,*.fs set syntax=glsl
+autocmd BufRead,BufNewFile *.tex :setl tw=120
 
 
 function! SetJava()
@@ -685,3 +706,7 @@ endif
 noremap <Leader>a :Ack <cword><cr>
 
 au BufNewFile,BufRead *.s set filetype=mips
+
+
+
+" cd $HOME/code/local
