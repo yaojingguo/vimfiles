@@ -13,7 +13,8 @@ set nocompatible
 "set gfn=RobotoMonoForPowerline-Regular:h17
 "set gfn=SourceCodeProForPowerline-Regular:h17
 "set gfn=FiraCode-Regular:h17
-set gfn=Fira\ Code\ Retina:h16
+"set gfn=Fira\ Code\ Retina:h16
+set gfn=Hack:h16
 "set gfn=Monaco:h18
 " set gfn=Monospace:h16
 "set gfn=ProggyClean\ 12
@@ -38,6 +39,9 @@ set hls
 syntax enable
 "set ic
 set autoread
+
+" Add homebrew fzf to the vim path:
+set rtp+=/usr/local/opt/fzf
 
 " execute pathogen#infect()
 filetype off                  " required
@@ -85,9 +89,9 @@ Plugin 'lervag/vimtex'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'yaojingguo/ir_black'
 
-" Add homebrew fzf to the vim path:
-set rtp+=/usr/local/opt/fzf
-Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/seoul256.vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'airblade/vim-rooter'
 
 
 " Add maktaba and codefmt to the runtimepath.
@@ -98,8 +102,22 @@ Plugin 'google/vim-codefmt'
 " `:help :Glaive` for usage.
 Plugin 'google/vim-glaive'
 
+Plugin 'junegunn/fzf.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
 
 " the glaive#Install() should go after the "call vundle#end()"
 call glaive#Install()
@@ -107,7 +125,6 @@ call glaive#Install()
 Glaive codefmt plugin[mappings]
 Glaive codefmt google_java_executable="java -jar /Users/jing/tools/google-java-format-1.9-all-deps.jar"
 Glaive codefmt clang_format_style="google"
-
 
 filetype plugin indent on
 syntax on
@@ -117,7 +134,6 @@ set wildignore+=bower_components
 set wildignore+=build-eclipse
 set wildignore+=build
 set wildignore+=target
-
 
 
 "tab page configuration
@@ -206,6 +222,8 @@ let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_follow_symlinks = 2
 
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
+let g:ctrlp_max_files = 0
 
 ab Tablularize Tab
 
@@ -562,6 +580,7 @@ function! SetJava()
   "setlocal tags+=./tags
   setlocal tags+=/Users/jing/code/github/languages/java/jdk1.8.0_162-src/tags
   setlocal noic
+  set includeexpr=""
   "setlocal foldmethod=expr
   "setlocal foldexpr=getline(v:lnum)[0:5]==\"import\"
   "setlocal formatoptions-=r
@@ -661,6 +680,7 @@ map <Leader>cd :exe 'cd ' . expand ("%:p:h")<CR>
 nmap <Leader>vx <Leader>cd:%w !xmllint --noout -<CR>
 nmap <Leader>px :%!xmllint --format -<CR>
 
+" https://vim.fandom.com/wiki/Find_files_in_subdirectories
 "set Find
 function! Find(...)
   if a:0==2
@@ -706,7 +726,3 @@ endif
 noremap <Leader>a :Ack <cword><cr>
 
 au BufNewFile,BufRead *.s set filetype=mips
-
-
-
-" cd $HOME/code/local
