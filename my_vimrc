@@ -13,8 +13,8 @@ set nocompatible
 "set gfn=RobotoMonoForPowerline-Regular:h17
 "set gfn=SourceCodeProForPowerline-Regular:h17
 "set gfn=FiraCode-Regular:h17
-"set gfn=Fira\ Code\ Retina:h16
-set gfn=Hack:h16
+set gfn=Fira\ Code\ Retina:h16
+" set gfn=Hack:h16
 "set gfn=Monaco:h18
 " set gfn=Monospace:h16
 "set gfn=ProggyClean\ 12
@@ -580,7 +580,8 @@ function! SetJava()
   "setlocal tags+=./tags
   setlocal tags+=/Users/jing/code/github/languages/java/jdk1.8.0_162-src/tags
   setlocal noic
-  set includeexpr=""
+  " set includeexpr=""
+  set isfname-=.
   "setlocal foldmethod=expr
   "setlocal foldexpr=getline(v:lnum)[0:5]==\"import\"
   "setlocal formatoptions-=r
@@ -679,45 +680,6 @@ endif
 map <Leader>cd :exe 'cd ' . expand ("%:p:h")<CR>
 nmap <Leader>vx <Leader>cd:%w !xmllint --noout -<CR>
 nmap <Leader>px :%!xmllint --format -<CR>
-
-" https://vim.fandom.com/wiki/Find_files_in_subdirectories
-"set Find
-function! Find(...)
-  if a:0==2
-    let path=a:1
-    let l:name=a:2
-  else
-    let path="."
-    let l:name=a:1
-  endif
-  let l:list=system("find ".path." -name '*.class' -prune -o -path '*/.svn' -prune -o -name '".l:name."' -print | perl -ne 'print \"$.\\t$_\"'")
-  let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
-  if l:num < 1
-    echo "'".l:name."' not found"
-    return
-  endif
-  if l:num != 1
-    echo l:list
-    let l:input=input("Which ? (CR=nothing)\n")
-    if strlen(l:input)==0
-      return
-    endif
-    if strlen(substitute(l:input, "[0-9]", "", "g"))>0
-      echo "Not a number"
-      return
-    endif
-    if l:input<1 || l:input>l:num
-      echo "Out of range"
-      return
-    endif
-    let l:line=matchstr("\n".l:list, "\n".l:input."\t[^\n]*")
-  else
-    let l:line=l:list
-  endif
-  let l:line=substitute(l:line, "^[^\t]*\t", "", "")
-  execute ":e ".l:line
-endfunction
-command! -nargs=* Find :call Find(<f-args>)
 
 " ack.vim
 if executable('ag')
