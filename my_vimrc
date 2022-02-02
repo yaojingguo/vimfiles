@@ -436,15 +436,14 @@ map <leader>w :NERDTree .<CR>
 "       \'\.class$',
 "       \'bower_components$', 'node_modules$', 'build-eclipse']
 " \'^target$', 
+function! SetNERD() 
+  " NERDTreeFocus
+  " NERDTreeMirror
+endfunction
 
 function! SetPython()
   call SetLocalTab(2)
   let g:NERDTreeIgnore += ['\.pdf$', '\.tex$', '\.html$', '\.log$', '\.txt$']
-endfunction
-
-function! SetNERD() 
-  " NERDTreeFocus
-  " NERDTreeMirror
 endfunction
 
 
