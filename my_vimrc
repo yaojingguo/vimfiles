@@ -13,7 +13,10 @@ set nocompatible
 "set gfn=RobotoMonoForPowerline-Regular:h17
 "set gfn=SourceCodeProForPowerline-Regular:h17
 "set gfn=FiraCode-Regular:h17
-set gfn=Fira\ Code\ Retina:h16
+set gfn=FiraCode-Regular:h16
+"set gfn=Fira\ Code\ Retina:h16
+"set gfn=Fira\ Code\ Retina:h16
+" set gfn=JetBrains\ Mono:h15
 " set gfn=Hack:h16
 "set gfn=Monaco:h18
 " set gfn=Monospace:h16
@@ -40,8 +43,6 @@ syntax enable
 "set ic
 set autoread
 
-" Add homebrew fzf to the vim path:
-set rtp+=/usr/local/opt/fzf
 
 " execute pathogen#infect()
 filetype off                  " required
@@ -53,6 +54,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'robbles/logstash.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -60,9 +62,11 @@ Plugin 'morhetz/gruvbox'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mhartington/oceanic-next'
-Plugin 'joshdick/onedark.vim'
 Plugin 'sonph/onehalf'
-Plugin 'luochen1990/rainbow'
+Plugin 'rhysd/vim-llvm'
+Plugin 'tpope/vim-vinegar'
+" Plugin 'luochen1990/rainbow'
+Plugin 'itkq/fluentd-vim'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'majutsushi/tagbar'
@@ -88,10 +92,16 @@ Plugin 'tpope/vim-speeddating'
 Plugin 'lervag/vimtex'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'yaojingguo/ir_black'
+Plugin 'jparise/vim-graphql'
+Plugin 'whonore/Coqtail'
+
+Plugin 'vim-python/python-syntax'
 
 Plugin 'junegunn/seoul256.vim'
 Plugin 'junegunn/goyo.vim'
-Plugin 'airblade/vim-rooter'
+
+Plugin 'joshdick/onedark.vim'
+" Plugin 'airblade/vim-rooter'
 
 
 " Add maktaba and codefmt to the runtimepath.
@@ -103,20 +113,22 @@ Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
 
 Plugin 'junegunn/fzf.vim'
+Plugin 'KeitaNakamura/neodark.vim'
+Plugin 'Joorem/vim-haproxy'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
 
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
+" " Mapping selecting mappings
+" nmap <leader><tab> <plug>(fzf-maps-n)
+" xmap <leader><tab> <plug>(fzf-maps-x)
+" omap <leader><tab> <plug>(fzf-maps-o)
 
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+" " Insert mode completion
+" imap <c-x><c-k> <plug>(fzf-complete-word)
+" imap <c-x><c-f> <plug>(fzf-complete-path)
+" imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
 " the glaive#Install() should go after the "call vundle#end()"
@@ -230,14 +242,14 @@ ab Tablularize Tab
 "Show filename
 set guitablabel=%M\ %t
 
-"snippets
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" "snippets
+" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+" " If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
 
 
 function Maximize_Window()
@@ -278,17 +290,16 @@ command Txml  :%!tidy -q -i -xml
 set nowrap
 
 "json indent
-map <leader>jf  <Esc>:%!python3 -m json.tool<CR>
+" map <leader>jf  <Esc>:%!python3 -m json.tool<CR>
+map <leader>jf  <Esc>:%!jq<CR>
+
+let g:python_highlight_all = 1
 
 "vimclojure
 let vimclojure#NailgunClient="ng"
 "let vimclojure#WantNailgun = 1
 map <leader>ng :let vimclojure#WantNailgun=1<CR>
 
-"nerdcommenter
-"let NERDRemoveExtraSpaces=0
- let NERDSpaceDelims=1
-" autocmd BufEnter * NERDTreeMirror
 
 "latex-suite
 "let g:Tex_DefaultTargetFormat='pdf'
@@ -413,17 +424,27 @@ map <leader>cp :cp<cr>
 let vimclojure#HighlightBuiltins=1
 let vimclojure#ParenRainbow=1
 
+"nerdcommenter
+"let NERDRemoveExtraSpaces=0
+ let NERDSpaceDelims=1
+autocmd BufEnter * call SetNERD()
 map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
-let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', '\.eps$'
-      \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '\.o$',
-      \'^buildEclipse$', '^target$', '\.class$',
-      \'bower_components$', 'node_modules$', 'build-eclipse']
-
+" let NERDTreeIgnore = ['tmp', 'tags', 'a.out', 'yfs1', 'yfs2', '\~$', '\.aux$', '\.eps$'
+"       \'\.pyc$', '\.hi$', '\.os$', 'cscope.*$', '\.o$',
+"       \'^buildEclipse$', 
+"       \'\.class$',
+"       \'bower_components$', 'node_modules$', 'build-eclipse']
+" \'^target$', 
 
 function! SetPython()
-  call SetTab(4)
+  call SetLocalTab(2)
   let g:NERDTreeIgnore += ['\.pdf$', '\.tex$', '\.html$', '\.log$', '\.txt$']
+endfunction
+
+function! SetNERD() 
+  " NERDTreeFocus
+  " NERDTreeMirror
 endfunction
 
 
@@ -494,7 +515,7 @@ map! <C-F> <Esc>gUiw`]a
 "set tab
 function! SetTab(num)
   call SetTabSize(a:num)
-	set expandtab
+  set expandtab
 endfunction
 
 function! SetTabSize(num)
@@ -511,6 +532,9 @@ function! SetLocalTab(num)
 endfunction
 
 call SetTab(2)
+" set tabstop=4
+" set softtabstop=4
+" set shiftwidth=4
 
 function! ST(title)
   "let &g:titlestring=a:title
@@ -553,7 +577,7 @@ let g:tagbar_type_go = {
 "set formatlistpat=^\\s*\\*?\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 
 function! SetC()
-  call SetLocalTab(4)
+  " call SetLocalTab(4)
   setlocal noic
   setl formatoptions-=ro " not to automatically insert comment leader
   setl formatoptions-=t
@@ -562,7 +586,13 @@ function! SetC()
   setl tw=100
 endfunction
 
+function! SetGo()
+  setl formatoptions-=t
+  setl formatoptions-=o
+endfunction
+
 autocmd BufRead,BufNewFile *.java call SetJava()
+autocmd BufRead,BufNewFile *.go call SetGo()
 autocmd BufRead,BufNewFile *.txt,*tex,*.md,README call Txt(80)
 autocmd BufRead,BufNewFile *.mail call Txt(70)
 autocmd BufRead,BufNewFile SConstruct :set syn=python
@@ -572,6 +602,7 @@ autocmd BufNewFile,BufRead *.cc11,*.h11 set syntax=cpp11
 autocmd BufNewFile,BufRead *.tla set syntax=tla
 autocmd BufNewFile,BufRead *.vs,*.fs set syntax=glsl
 autocmd BufRead,BufNewFile *.tex :setl tw=120
+autocmd BufRead,BufNewFile fluent.conf set syntax=fluentd
 
 
 function! SetJava()
@@ -688,3 +719,12 @@ endif
 noremap <Leader>a :Ack <cword><cr>
 
 au BufNewFile,BufRead *.s set filetype=mips
+
+" Add homebrew fzf to the vim path:
+set rtp+=/usr/local/opt/fzf
+" nnoremap <silent> <Leader><Space> :Files<CR>
+nnoremap <C-i> :Files<CR>
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+
+set path=/Users/jing/code/local/include
