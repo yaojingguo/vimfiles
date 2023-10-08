@@ -17,19 +17,6 @@
 "color oceanblack
 "color github
 
-" set background=dark "Setting dark mode
-" let g:gruvbox_contrast_dark='soft'
-" color gruvbox
-
-" set background=dark "Setting dark mode
-" let g:gruvbox_contrast_dark='soft'
-
-let g:neodark#use_256color = 1
-colorscheme neodark
-
-" let g:seoul256_background = 235
-" color seoul256
-
 " let g:onedark_termcolors=16
 " let g:airline_theme='onedark'
 " color onedark
@@ -39,10 +26,15 @@ colorscheme neodark
 " color solarized
 
 " for vim 8
+if (has("termguicolors"))
+  set termguicolors
+endif
+colorscheme OceanicNext
+
 " if (has("termguicolors"))
 "   set termguicolors
 " endif
-" colorscheme OceanicNext
+" colorscheme monokai_pro
 
 set guioptions-=m  "remove menu bar
 set cursorline

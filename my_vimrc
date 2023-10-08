@@ -13,17 +13,9 @@ set nocompatible
 "set gfn=RobotoMonoForPowerline-Regular:h17
 "set gfn=SourceCodeProForPowerline-Regular:h17
 "set gfn=FiraCode-Regular:h17
-set gfn=FiraCode-Regular:h16
-"set gfn=Fira\ Code\ Retina:h16
-"set gfn=Fira\ Code\ Retina:h16
-" set gfn=JetBrains\ Mono:h15
-" set gfn=Hack:h16
-"set gfn=Monaco:h18
-" set gfn=Monospace:h16
-"set gfn=ProggyClean\ 12
-"let g:rehash256 = 1
-"color molokai
-"
+"set gfn=FiraCode-Regular:h16
+set gfn=FiraCode-Regular:h15
+"set gfn=DMMono-Regular:h15
 
 " set macligatures
 " set guifont=Fira\ Code:h19
@@ -53,13 +45,14 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
+Plugin 'preservim/vim-markdown'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'robbles/logstash.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'morhetz/gruvbox'
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'preservim/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mhartington/oceanic-next'
 Plugin 'sonph/onehalf'
@@ -73,7 +66,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'tpope/vim-abolish'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
@@ -83,7 +76,7 @@ Plugin 'tfnico/vim-gradle'
 Plugin 'pangloss/vim-javascript'
 Plugin 'MaxMEllon/vim-jsx-pretty'
 Plugin 'peitalin/vim-jsx-typescript'
-Plugin 'tpope/vim-markdown'
+" Plugin 'tpope/vim-markdown'
 Plugin 'Harenome/vim-mipssyntax'
 Plugin 'jceb/vim-orgmode'
 Plugin 'derekwyatt/vim-scala'
@@ -93,7 +86,6 @@ Plugin 'lervag/vimtex'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'yaojingguo/ir_black'
 Plugin 'jparise/vim-graphql'
-Plugin 'whonore/Coqtail'
 
 Plugin 'vim-python/python-syntax'
 
@@ -102,6 +94,8 @@ Plugin 'junegunn/goyo.vim'
 
 Plugin 'joshdick/onedark.vim'
 " Plugin 'airblade/vim-rooter'
+
+Plugin 'cespare/vim-toml'
 
 
 " Add maktaba and codefmt to the runtimepath.
@@ -116,8 +110,22 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'KeitaNakamura/neodark.vim'
 Plugin 'Joorem/vim-haproxy'
 
+Plugin 'https://gn.googlesource.com/gn', { 'rtp': 'misc/vim' }
+
+Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'mechatroner/rainbow_csv'
+Plugin 'psf/black'
+
+Plugin 'phanviet/vim-monokai-pro'
+
+Plugin 'kchmck/vim-coffee-script'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+
+let g:vimtex_view_method = 'skim'
+let g:vim_markdown_folding_disabled = 1
 
 
 " " Mapping selecting mappings
@@ -426,7 +434,15 @@ let vimclojure#ParenRainbow=1
 
 "nerdcommenter
 "let NERDRemoveExtraSpaces=0
- let NERDSpaceDelims=1
+let NERDSpaceDelims=1
+let g:NERDCustomDelimiters = { 'cpp': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' } }
+
+let g:NERDCustomDelimiters = {
+    \ 'cpp': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'python': { 'left': '#', 'leftAlt': '#' }
+\ }
+
+
 autocmd BufEnter * call SetNERD()
 map <Leader>d :NERDTreeToggle<CR>
 map <leader>w :NERDTree .<CR>
@@ -442,7 +458,7 @@ function! SetNERD()
 endfunction
 
 function! SetPython()
-  call SetLocalTab(2)
+  call SetLocalTab(4)
   let g:NERDTreeIgnore += ['\.pdf$', '\.tex$', '\.html$', '\.log$', '\.txt$']
 endfunction
 
@@ -712,8 +728,11 @@ nmap <Leader>vx <Leader>cd:%w !xmllint --noout -<CR>
 nmap <Leader>px :%!xmllint --format -<CR>
 
 " ack.vim
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+" if executable('ag')
+"   let g:ackprg = 'ag --vimgrep'
+" endif
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
 endif
 noremap <Leader>a :Ack <cword><cr>
 
@@ -721,9 +740,14 @@ au BufNewFile,BufRead *.s set filetype=mips
 
 " Add homebrew fzf to the vim path:
 set rtp+=/usr/local/opt/fzf
-" nnoremap <silent> <Leader><Space> :Files<CR>
-nnoremap <C-i> :Files<CR>
+
+nnoremap <C-i> :GFiles<CR>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
 set path=/Users/jing/code/local/include
+
+" A fix for 'This Vim cannot execute :py3 after using :python'
+" See https://robertbasic.com/blog/force-python-version-in-vim/
+if has('python3')
+endif
